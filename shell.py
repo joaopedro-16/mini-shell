@@ -9,11 +9,13 @@ def ler_comando():
 
         entrada_bytes = os.read(0, 1024)
 
-        if not entrada_bytes: return None
+        if not entrada_bytes:
+            return None
 
         entrada_str = entrada_bytes.decode().strip()
 
-        if not entrada_str: return []
+        if not entrada_str: 
+            return []
 
         return entrada_str.split()
     
@@ -38,9 +40,8 @@ def executar_comando(args):
                 os.execvp(args[0], args)
                 
             except FileNotFoundError:
-                # Se o comando não existir, o execvp falha e cai aqui.
                 print(f"Erro: Comando '{args[0]}' não encontrado.")
-                os._exit(1) # Encerra o filho com erro
+                os._exit(1) 
             except OSError as e:
                 print(f"Erro ao executar: {e}")
                 os._exit(1)
@@ -63,7 +64,7 @@ def main():
     while True:
         args = ler_comando()
         
-        if args is None: # EOF
+        if args is None: # EOF (End of File) (Ctrl+D)
             os.write(1, b"\n")
             break
             
