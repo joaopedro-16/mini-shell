@@ -28,13 +28,10 @@ def executar_comando(args):
                 os._exit(1)
 
         elif pid > 0:
-            # === ESTAMOS NO PROCESSO PAI (SHELL) ===
-            # O pai precisa esperar o filho terminar antes de mostrar o prompt de novo.
-            # os.wait() retorna uma tupla (pid, status), mas só queremos esperar.
+            # os.wait() retorna uma tupla (pid, status).
             os.wait()
 
         else:
-            # pid < 0: Erro grave, o sistema não conseguiu criar o processo
             print("Erro ao criar processo (fork falhou).")
 
     except OSError as e:
